@@ -1,0 +1,89 @@
+<div class="row justify-content-center my-5">
+	<div class="col-md-5 mb-5">
+
+		<div class="lednicka">
+			<div class="inner">
+				<div class="items">
+			
+
+
+					<? foreach ($_food as $data) : ?>
+
+					<span class="badge bg-<?= $data['colour'] ?>"><?= $data['name'] ?></span>
+
+					<? endforeach ?>
+
+
+
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div class="col-md-1"></div>
+
+	<div class="col-md-3 mb-5">
+		<?
+		if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
+			echo'<h2>Upravit potravinu v lednici</h2>';
+        } else {
+			echo'<h2>Vložit novou potravinu do lednice</h2>';
+		}
+		$edit['id'] = isset($edit['id']) ? $edit['id'] : '';
+		$edit['name'] = isset($edit['name']) ? $edit['name'] : '';
+		$edit['date_manufacture'] = isset($edit['date_manufacture']) ? $edit['date_manufacture'] : '';
+		$edit['date_purchase'] = isset($edit['date_purchase']) ? $edit['date_purchase'] : '';
+		$edit['date_min_expire'] = isset($edit['date_min_expire']) ? $edit['date_min_expire'] : '';
+		$edit['date_expire'] = isset($edit['date_expire']) ? $edit['date_expire'] : '';
+		?>
+		<form action="#" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="<?= $edit['id'] ?>">
+			<div class="form-group">
+				<label for="name">Název potraviny<span>*</span></label>
+				<input type="text" class="form-control" id="name" name="name" required value="<?= $edit['name'] ?>">
+			</div>
+			<div class="form-group">
+				<label for="date_manufacture">Datum výroby (DV)</label>
+				<input type="date" class="form-control" id="date_manufacture" name="date_manufacture" value="<?= $edit['date_manufacture'] ?>">
+			</div>
+			<div class="form-group">
+				<label for="date_purchase">Datum nákupu (DN)<span>*</span></label>
+				<input type="date" class="form-control" id="date_purchase" name="date_purchase" required value="<?= $edit['date_purchase'] ?>">
+			</div>
+			<div class="form-group">
+				<label for="date_min_expire">Datum minimální trvanlivosti (DMT)<span>*</span></label>
+				<input type="date" class="form-control" id="date_min_expire" name="date_min_expire" required value="<?= $edit['date_min_expire'] ?>">
+			</div>
+			<div class="form-group">
+				<label for="date_expire">Datum spotřeby (DS)</label>
+				<input type="date" class="form-control" id="date_expire" name="date_expire" value="<?= $edit['date_expire'] ?>">
+			</div>
+			<div class="form-group">
+				<label for="image">Fotografie produktu (FP)</label>
+				<input type="file" class="form-control-file" id="image" name="image">
+			</div>
+			<button type="submit" class="btn btn-primary">Odeslat</button>
+		</form>
+	</div>
+
+	<div class="col">
+
+					<table class="table mt-5">
+
+					<tr><th>Název</th><th>Datum výroby</th><th>Datum nákupu</th><th>Datum minimální trvanlivosti</th><th>Datum spotřeby</th><th></th><th></th></tr>
+
+					<? foreach ($_food as $data) : ?>
+
+					<tr class="<?= $data['rowClass'] ?>"><td><?= $data['name'] ?></td><td><?= $data['date_manufacture'] ?></td><td><?= $data['date_purchase'] ?></td><td><?= $data['date_min_expire'] ?></td><td><?= $data['date_expire'] ?></td><td>
+						
+					<? if ($data['image']!=NULL) echo'<img src="'.$data['image'].'" width="80">'; ?>
+					
+					</td><td><a href="/fridge?edit=<?= $data['id'] ?>">Upravit</a> <a href="/fridge?delete=<?= $data['id'] ?>">Smazat</a></td></tr>
+
+					<? endforeach ?>
+
+					</table>
+
+	</div>
+
+</div>

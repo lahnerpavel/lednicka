@@ -1,0 +1,28 @@
+.lednicka {
+	background: url("/images/background-fridge-middle.jpg") repeat-y;
+	background-size: 100%;
+}
+
+.lednicka .inner {
+	background: url("/images/background-fridge-top.jpg") no-repeat;
+	background-size: 100%;
+	min-height: 30rem;
+	padding-top: 0.1px;
+	padding-bottom: 26%;
+	position: relative;
+}
+
+.lednicka .inner:after {
+	content: "";
+	display: block;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	background: url("/images/background-fridge-bottom.jpg") no-repeat bottom;
+	background-size: 100%;
+	padding-bottom: 26%;
+}
+
+.lednicka .items {
+	margin: 30% 10% 10% 25%;
+}
